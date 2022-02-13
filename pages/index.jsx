@@ -2,10 +2,11 @@ import Head from 'next/head'
 import { useState } from 'react'
 import HeaderAndForm from '../components/HeaderAndForm'
 import OrderCard from '../components/OrderCard'
+import { getOrders } from '../services'
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState('')
-  const [order, setOrder] = useState([])
+  const [orders, setOrders] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -15,6 +16,18 @@ export default function Home() {
       return
     }
     console.log('submit done', phoneNumber)
+    try {
+      getOrders(phoneNumber).then((res) => {
+        console.log('getOrders', res)
+        if (res.length === 0) {
+          alert('ไม่พบรายการสั่งซื้อ กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ')
+          return
+        }
+        setOrders(res)
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleChange = (e) => setPhoneNumber(e.target.value)
@@ -28,11 +41,9 @@ export default function Home() {
       <HeaderAndForm handleChange={handleChange} handleSubmit={handleSubmit} />
       {/* order list */}
       <div className="flex flex-wrap items-center justify-center  ">
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
+        {orders
+          ? orders.map((order) => <OrderCard order={order} key={order.id} />)
+          : null}
       </div>
     </div>
   )

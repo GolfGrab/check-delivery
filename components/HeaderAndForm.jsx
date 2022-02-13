@@ -10,23 +10,23 @@ function HeaderAndForm({ handleChange, handleSubmit }) {
         </h1>
         {/* form section */}
         <p className="mb-[0.75rem] text-center">
-          กรุณากรอกเบอร์โทรศัพท์เพื่อเช็คออเดอร์ค่ะ
+          กรุณากรอกหมายเลขโทรศัพท์เพื่อเช็คออเดอร์ค่ะ
         </p>
 
         <form onSubmit={handleSubmit}>
           <div className="">
             <div className=" mx-10 w-[17rem]  items-center justify-center">
-              <div class="  mb-[0.75rem] h-[3rem]">
+              <div className="  mb-[0.75rem] h-[3rem]">
                 <input
                   onChange={handleChange}
-                  class="mb-[0.75rem] block h-full w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                  className="mb-[0.75rem] block h-full w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
                   type="tel"
                 />
               </div>
 
               <div className="mb-[0.75rem] h-[3rem]">
                 <button
-                  class="my-[0.75rem] h-full w-full rounded-md bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40  "
+                  className="my-[0.75rem] h-full w-full rounded-md bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40  "
                   type="submit"
                 >
                   ตรวจสอบ
