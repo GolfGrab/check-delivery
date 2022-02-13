@@ -3,6 +3,7 @@ import { useState } from 'react'
 import HeaderAndForm from '../components/HeaderAndForm'
 import OrderCard from '../components/OrderCard'
 import { getOrders } from '../services'
+import Swal from 'sweetalert2'
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -12,7 +13,12 @@ export default function Home() {
     e.preventDefault()
     console.log('submit', phoneNumber)
     if (phoneNumber.length !== 10) {
-      alert('กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง')
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้อง',
+      })
+
       return
     }
     console.log('submit done', phoneNumber)
@@ -20,7 +26,13 @@ export default function Home() {
       getOrders(phoneNumber).then((res) => {
         console.log('getOrders', res)
         if (res.length === 0) {
-          alert('ไม่พบรายการสั่งซื้อ กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ')
+          Swal.fire({
+            icon: 'question',
+            title: 'ไม่พบรายการสั่งซื้อ',
+            text: ' กรุณาตรวจสอบหมายเลขโทรศัพท์ของคุณ',
+            footer: '<a href="#">ติดต่อสอบถามผู้ขาย?</a>',
+          })
+
           return
         }
         setOrders(res)
