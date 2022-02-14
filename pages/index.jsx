@@ -23,7 +23,7 @@ export default function Home() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้องค่ะ',
+        text: 'กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้องค่ะ  เช่น 0812345678',
       })
 
       return

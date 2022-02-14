@@ -36,7 +36,7 @@ function HeaderAndForm({ phoneInput, handleSubmit }) {
                 <input
                   type="tel"
                   ref={phoneInput}
-                  placeholder="0987654321"
+                  placeholder="0912345678"
                   className="relative w-full rounded border-0 bg-white px-3 py-3  pl-10 text-sm text-neutral-800 placeholder-neutral-300 shadow outline-none ring-[#977fd7] focus:outline-none focus:ring"
                 />
               </div>
