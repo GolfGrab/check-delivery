@@ -2,30 +2,27 @@ import { request, gql } from 'graphql-request'
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
 
-export const getOrders = async (userPhoneNumber) => {
+export const getCustomerOrders = async (userPhoneNumber) => {
   const query = gql`
-    query MyQuery($userPhoneNumber: String!) {
-      orders(
-        where: { userAccount: { userPhoneNumber: $userPhoneNumber } }
-        orderBy: createdAt_DESC
-      ) {
-        orderDescription
-        orderStatus
-        id
-        updatedAt
-        product {
-          productName
+    query CustomerOrders($userPhoneNumber: String!) {
+      customer(where: { customerPhoneNumber: $userPhoneNumber }) {
+        order(orderBy: createdAt_DESC) {
+          createdAt
+          orderDetails
+          orderStatus
+          product {
+            productName
+            productDescription
+          }
+          totalAmount
+          totalPrice
+          debt
         }
-        createdAt
-        amount
-        delivered
-        other
-        paidPrice
-        totalPrice
+        customerName
       }
     }
   `
 
   const result = await request(graphqlAPI, query, { userPhoneNumber })
-  return result.orders
+  return result.customer
 }

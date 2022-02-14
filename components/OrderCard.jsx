@@ -25,17 +25,18 @@ function OrderCard({ order }) {
         </div>
       </div>
       <div className=" text-2xl font-semibold">{order.product.productName}</div>
-      <div className="text-sm">รายละเอียดสินค้า : {order.orderDescription}</div>
-      <div className="text-sm">จำนวน : {order.amount}</div>
-      <div className="text-sm">ราคารวม : {order.totalPrice} บาท</div>
-      <div className="text-sm">ชำระเงินแล้ว : {order.paidPrice} บาท</div>
-      <div className="text-sm">สถานะสินค้า : {order.orderStatus}</div>
-      <div className="text-sm">
-        สถานะการจัดส่ง : {order.delivered ? 'จัดส่งแล้ว' : 'ยังไม่ได้จัดส่ง'}
+      <div className=" text-sm font-semibold">
+        {order.product.productDescription}
       </div>
-      {order.other && (
-        <div className="text-sm">หมายเหตุเพิ่มเติม : {order.other} </div>
-      )}
+      <br />
+      <div className="text-sm">รายละเอียดสินค้า : {order.orderDetails}</div>
+      <br />
+      <div className="text-sm">จำนวนสินค้ารวม : {order.totalAmount}</div>
+      <div className="text-sm">ราคารวม : {order.totalPrice} บาท</div>
+      <div className="text-sm">ค้างชำระ : {order.debt} บาท</div>
+      <div className="text-sm">สถานะสินค้า : {order.orderStatus}</div>
+
+      {/* <div>{JSON.stringify(order)}</div> */}
     </div>
   )
 }

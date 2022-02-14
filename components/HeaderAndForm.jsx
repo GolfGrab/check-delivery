@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HeaderAndForm({ handleChange, handleSubmit }) {
+function HeaderAndForm({ phoneInput, handleSubmit }) {
   return (
     <div className="  flex max-w-[20rem] items-center justify-center     px-[1.5rem] py-[3rem]">
       <main className="">
@@ -16,11 +16,28 @@ function HeaderAndForm({ handleChange, handleSubmit }) {
         <form onSubmit={handleSubmit}>
           <div className="">
             <div className=" mx-10 w-[17rem]  items-center justify-center">
-              <div className="  mb-[0.75rem] h-[3rem]">
+              <div className="relative  mb-[0.75rem] flex  h-[3rem] w-full flex-wrap items-stretch">
+                <span className="text-blueGray-300 absolute  z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pl-3 text-center text-base font-normal leading-snug">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                </span>
                 <input
-                  onChange={handleChange}
-                  className="mb-[0.75rem] block h-full w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
                   type="tel"
+                  ref={phoneInput}
+                  placeholder="Placeholder"
+                  className="placeholder-blueGray-300 text-blueGray-600 relative w-full rounded border-0 bg-white  px-3 py-3 pl-10 text-sm shadow outline-none focus:outline-none focus:ring"
                 />
               </div>
 
