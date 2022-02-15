@@ -2,27 +2,118 @@ import { request, gql } from 'graphql-request'
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
 
-export const getCustomerOrders = async (userPhoneNumber) => {
+export const getCustomerOrdersFromEmail = async (customerEmail) => {
   const query = gql`
-    query CustomerOrders($userPhoneNumber: String!) {
-      customer(where: { customerPhoneNumber: $userPhoneNumber }) {
-        order(orderBy: createdAt_DESC) {
+    query CustomerOrdersFromEmail($customerEmail: String!) {
+      customers(where: { customerEmail: $customerEmail }) {
+        customerEmail
+        customerId
+        customerName
+        customerPhoneNumber
+        orders(orderBy: createdAt_DESC) {
           createdAt
+          debt
           orderDetails
           orderStatus
-          product {
-            productName
-            productDescription
-          }
           totalAmount
           totalPrice
-          debt
+          updatedAt
+          product {
+            productDescription
+            productName
+          }
         }
-        customerName
       }
     }
   `
 
-  const result = await request(graphqlAPI, query, { userPhoneNumber })
+  const result = await request(graphqlAPI, query, { customerEmail })
+  return result.customer
+}
+
+export const getCustomerOrdersFromId = async (customerId) => {
+  const query = gql`
+    query CustomerOrdersFromId($customerId: String!) {
+      customers(where: { customerId: $customerId }) {
+        customerEmail
+        customerId
+        customerName
+        customerPhoneNumber
+        orders(orderBy: createdAt_DESC) {
+          createdAt
+          debt
+          orderDetails
+          orderStatus
+          totalAmount
+          totalPrice
+          updatedAt
+          product {
+            productDescription
+            productName
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query, { customerId })
+  return result.customer
+}
+
+export const getCustomerOrdersFromName = async (customerName) => {
+  const query = gql`
+    query CustomerOrdersFromName($customerName: String!) {
+      customers(where: { customerName: $customerName }) {
+        customerEmail
+        customerId
+        customerName
+        customerPhoneNumber
+        orders(orderBy: createdAt_DESC) {
+          createdAt
+          debt
+          orderDetails
+          orderStatus
+          totalAmount
+          totalPrice
+          updatedAt
+          product {
+            productDescription
+            productName
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query, { customerName })
+  return result.customer
+}
+
+export const getCustomerOrdersFromPhoneNumber = async (customerPhoneNumber) => {
+  const query = gql`
+    query CustomerOrdersFromPhoneNumber($customerPhoneNumber: String!) {
+      customers(where: { customerPhoneNumber: $customerPhoneNumber }) {
+        customerEmail
+        customerId
+        customerName
+        customerPhoneNumber
+        orders(orderBy: createdAt_DESC) {
+          createdAt
+          debt
+          orderDetails
+          orderStatus
+          totalAmount
+          totalPrice
+          updatedAt
+          product {
+            productDescription
+            productName
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query, { customerPhoneNumber })
   return result.customer
 }
