@@ -21,27 +21,37 @@ function OrderCard({ order }) {
     Problem: 'https://www.svgrepo.com/show/395724/focus-aim-goal-target.svg',
   }
   const [icon, setIcon] = useState(iconSrc.cancel)
+  const [status, setStatus] = useState(order.orderStatus)
   useEffect(() => {
     if (order.orderStatus === 'Success') {
       setIcon(iconSrc.Success)
+      setStatus('สำเร็จ')
     } else if (order.orderStatus === 'Canceled') {
       setIcon(iconSrc.Canceled)
+      setStatus('ยกเลิก')
     } else if (order.orderStatus === 'NowOfficeKorea') {
       setIcon(iconSrc.NowOfficeKorea)
+      setStatus('ถึงออฟฟิศที่เกาหลีแล้ว')
     } else if (order.orderStatus === 'NowSentKorea') {
       setIcon(iconSrc.NowSentKorea)
+      setStatus('ส่งสินค้าออกจากเกาหลีแล้ว')
     } else if (order.orderStatus === 'NowSentThailand') {
       setIcon(iconSrc.NowSentThailand)
+      setStatus('ส่งสินค้าในไทยแล้ว')
     } else if (order.orderStatus === 'NowThailand') {
       setIcon(iconSrc.NowThailand)
+      setStatus('สินค้าส่งถึงไทยแล้ว')
     } else if (order.orderStatus === 'PendingPay') {
       setIcon(iconSrc.PendingPay)
+      setStatus('รอการชำระเงิน')
     } else if (order.orderStatus === 'PendingPreOrder') {
       setIcon(iconSrc.PendingPreOrder)
+      setStatus('รอการสั่งซื้อ')
     } else if (order.orderStatus === 'Problem') {
       setIcon(iconSrc.Problem)
+      setStatus('มีปัญหาบางอย่างเกิดขึ้น โปรดติดต่อร้าน')
     }
-  }, [order])
+  }, [])
 
   return (
     <div className=" m-[1.5rem]   w-[20rem] rounded-xl border-4  border-[#ffc9c2]   bg-[#ffffc2] p-[1rem] px-[1.5rem] transition ease-in hover:scale-105">
@@ -82,7 +92,7 @@ function OrderCard({ order }) {
           color: order.orderStatus === 'Success' ? '#01a66f' : '#f29339',
         }}
       >
-        สถานะสินค้า : {order.orderStatus}
+        สถานะสินค้า : {status}
       </div>
 
       {/* <div>{JSON.stringify(order)}</div> */}

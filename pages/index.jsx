@@ -38,7 +38,8 @@ export default function Home() {
             icon: 'question',
             title: 'ไม่พบรายการสั่งซื้อ',
             text: ' กรุณาตรวจสอบหมายเลขโทรศัพท์อีกครั้งค่ะ',
-            footer: '<a href="#">ติดต่อสอบถามผู้ขาย?</a>',
+            footer:
+              '<a href="https://twitter.com/jisungmommyy/" target="_blank" rel="noopener noreferrer" >ติดต่อสอบถาม?</a>',
           })
 
           return
@@ -55,8 +56,8 @@ export default function Home() {
   return (
     <div className="container mx-auto flex flex-col items-center  py-[3rem] ">
       <Head>
-        <title>Check-Delivery</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Friendteamsweet</title>
+        <link rel="icon" href="/newFavicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
