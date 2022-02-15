@@ -102,7 +102,7 @@ function HeaderAndForm({
                   )}
                 </span>
                 <input
-                  type="tel"
+                  type="text"
                   ref={formInput}
                   placeholder={
                     formType === 'email'
