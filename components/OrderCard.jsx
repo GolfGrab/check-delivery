@@ -6,18 +6,14 @@ function OrderCard({ order }) {
     Success: 'https://www.svgrepo.com/show/395713/accept-mark-check-tick.svg',
     Canceled:
       'https://www.svgrepo.com/show/395697/cancel-remove-delete-cross.svg',
-    NowOfficeKorea:
-      'https://www.svgrepo.com/show/395694/estate-building-home-house.svg',
-    NowSentKorea:
-      'https://www.svgrepo.com/show/395725/forecast-storage-weather-cloud.svg',
-    NowThailand:
-      'https://www.svgrepo.com/show/395739/navigation-gps-map-pin-location.svg',
-    NowSentThailand:
-      'https://www.svgrepo.com/show/395705/envelope-letter-email-mail-send.svg',
+    Delivered:
+      'https://www.svgrepo.com/show/395714/email-message-mail-envelope.svg',
     PendingPay:
       'https://www.svgrepo.com/show/395737/sync-refresh-loading-load.svg',
     PendingPreOrder:
       'https://www.svgrepo.com/show/395704/store-shop-shopping-bag.svg',
+    PendingPreparation:
+      'https://www.svgrepo.com/show/395740/like-award-favorite-star.svg',
     Problem: 'https://www.svgrepo.com/show/395724/focus-aim-goal-target.svg',
   }
   const [icon, setIcon] = useState(iconSrc.cancel)
@@ -29,32 +25,29 @@ function OrderCard({ order }) {
     } else if (order.orderStatus === 'Canceled') {
       setIcon(iconSrc.Canceled)
       setStatus('ยกเลิก')
-    } else if (order.orderStatus === 'NowOfficeKorea') {
-      setIcon(iconSrc.NowOfficeKorea)
-      setStatus('ถึงออฟฟิศที่เกาหลีแล้ว')
-    } else if (order.orderStatus === 'NowSentKorea') {
-      setIcon(iconSrc.NowSentKorea)
-      setStatus('ส่งสินค้าออกจากเกาหลีแล้ว')
-    } else if (order.orderStatus === 'NowSentThailand') {
-      setIcon(iconSrc.NowSentThailand)
-      setStatus('ส่งสินค้าในไทยแล้ว')
-    } else if (order.orderStatus === 'NowThailand') {
-      setIcon(iconSrc.NowThailand)
-      setStatus('สินค้าส่งถึงไทยแล้ว')
+    } else if (order.orderStatus === 'Delivered') {
+      setIcon(iconSrc.Delivered)
+      setStatus('จัดส่งแล้ว')
     } else if (order.orderStatus === 'PendingPay') {
       setIcon(iconSrc.PendingPay)
       setStatus('รอการชำระเงิน')
     } else if (order.orderStatus === 'PendingPreOrder') {
       setIcon(iconSrc.PendingPreOrder)
       setStatus('รอการสั่งซื้อ')
+    } else if (order.orderStatus === 'PendingPreparation') {
+      setIcon(iconSrc.PendingPreparation)
+      setStatus('รอการจัดเตรียมสินค้า')
     } else if (order.orderStatus === 'Problem') {
+      setIcon(iconSrc.Problem)
+      setStatus('มีปัญหาบางอย่างเกิดขึ้น โปรดติดต่อร้าน')
+    } else {
       setIcon(iconSrc.Problem)
       setStatus('มีปัญหาบางอย่างเกิดขึ้น โปรดติดต่อร้าน')
     }
   }, [])
 
   return (
-    <div className=" m-[1.5rem]   w-[20rem] rounded-xl border-4  border-[#ffc9c2]   bg-[#ffffc2] p-[1rem] px-[1.5rem] transition ease-in hover:scale-105">
+    <div className=" m-[1.5rem]   w-[20rem] rounded-xl border-4  border-[#ffbcb7]   bg-[#fcfce2] p-[1rem] px-[1.5rem] shadow-lg shadow-[#ffbcb7]/80 transition ease-in hover:scale-105">
       {/* date and icon */}
       <div className="flex  w-full items-center justify-between">
         <div className="opacity-70">

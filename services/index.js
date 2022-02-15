@@ -28,7 +28,7 @@ export const getCustomerOrdersFromEmail = async (customerEmail) => {
   `
 
   const result = await request(graphqlAPI, query, { customerEmail })
-  return result.customer
+  return result.customers[0]
 }
 
 export const getCustomerOrdersFromId = async (customerId) => {
@@ -57,7 +57,7 @@ export const getCustomerOrdersFromId = async (customerId) => {
   `
 
   const result = await request(graphqlAPI, query, { customerId })
-  return result.customer
+  return result.customers[0]
 }
 
 export const getCustomerOrdersFromName = async (customerName) => {
@@ -86,7 +86,7 @@ export const getCustomerOrdersFromName = async (customerName) => {
   `
 
   const result = await request(graphqlAPI, query, { customerName })
-  return result.customer
+  return result.customers[0]
 }
 
 export const getCustomerOrdersFromPhoneNumber = async (customerPhoneNumber) => {
@@ -115,5 +115,5 @@ export const getCustomerOrdersFromPhoneNumber = async (customerPhoneNumber) => {
   `
 
   const result = await request(graphqlAPI, query, { customerPhoneNumber })
-  return result.customer
+  return result.customers[0]
 }

@@ -2,50 +2,80 @@ import Head from 'next/head'
 import { useRef, useState } from 'react'
 import HeaderAndForm from '../components/HeaderAndForm'
 import OrderCard from '../components/OrderCard'
-import { getCustomerOrders } from '../services'
+import {
+  getCustomerOrdersFromEmail,
+  getCustomerOrdersFromId,
+  getCustomerOrdersFromName,
+  getCustomerOrdersFromPhoneNumber,
+} from '../services'
 import Swal from 'sweetalert2'
 
 export default function Home() {
-  const phoneInput = useRef(null)
+  const formInput = useRef(null)
   const [orders, setOrders] = useState([])
   const [customerName, setCustomerName] = useState('')
+  const [formType, setFormType] = useState('email')
+
+  const queryFunc = {
+    email: getCustomerOrdersFromEmail,
+    tel: getCustomerOrdersFromPhoneNumber,
+    username: getCustomerOrdersFromName,
+    userCode: getCustomerOrdersFromId,
+  }
+
+  const handleFormTypeChange = (e) => {
+    formInput.current.value = ''
+    setFormType(e.target.value)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const phoneNumber = phoneInput.current.value
-    console.log('submit', phoneNumber)
-    if (
-      phoneNumber.length !== 10 ||
-      isNaN(phoneNumber) ||
-      !/^[0-9]+$/.test(phoneNumber)
-    ) {
+    const formValue = formInput.current.value.trim() || ''
+    console.log('submit', formValue)
+    if (formValue === '' || formValue === null) {
       setOrders([])
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'กรุณากรอกหมายเลขโทรศัพท์ให้ถูกต้องค่ะ  เช่น 0812345678',
+        html: `<p class="p-2">กรุณากรอกข้อมูลให้ถูกต้องครับ</p><p class="p-2">หรือลอง ${
+          formType === 'email'
+            ? 'myemail123@email.com'
+            : formType === 'tel'
+            ? '0812345678'
+            : formType === 'username'
+            ? 'myusername'
+            : 'customer123'
+        }</p>`,
       })
 
       return
     }
-    console.log('submit done', phoneNumber)
+    console.log('submit done', formValue)
     try {
-      getCustomerOrders(phoneNumber).then((res) => {
-        console.log('getCustomerOrders', res)
+      console.log(formType)
+      queryFunc[formType](formValue).then((res) => {
         if (!res || res.length === 0) {
           setOrders([])
           Swal.fire({
             icon: 'question',
             title: 'ไม่พบรายการสั่งซื้อ',
-            text: ' กรุณาตรวจสอบหมายเลขโทรศัพท์อีกครั้งค่ะ',
+            html: `<p class="p-2">กรุณาตรวจสอบข้อมูลอีกครัังครับ</p><p class="p-2">หรือลอง ${
+              formType === 'email'
+                ? 'myemail123@email.com'
+                : formType === 'tel'
+                ? '0812345678'
+                : formType === 'username'
+                ? 'myusername'
+                : 'customer123'
+            }</p>`,
             footer:
-              '<a href="https://twitter.com/jisungmommyy/" target="_blank" rel="noopener noreferrer" >ติดต่อสอบถาม?</a>',
+              '<a href="https://twitter.com/draculacode" target="_blank" rel="noopener noreferrer" >ติดต่อสอบถาม?</a>',
           })
 
           return
         }
         Swal.fire('Done!', '<br/>ค้นหารายการสั่งซื้อเสร็จสิ้น<br/>', 'success')
-        setOrders(res.order)
+        setOrders(res.orders)
         setCustomerName(res.customerName)
       })
     } catch (error) {
@@ -56,8 +86,8 @@ export default function Home() {
   return (
     <div className="container mx-auto flex flex-col items-center  py-[3rem] ">
       <Head>
-        <title>Friendteamsweet</title>
-        <link rel="icon" href="/newFavicon.ico" />
+        <title>Dracula Code </title>
+        <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -66,9 +96,14 @@ export default function Home() {
         />
       </Head>
       {/* header and form */}
-      <HeaderAndForm phoneInput={phoneInput} handleSubmit={handleSubmit} />
+      <HeaderAndForm
+        formInput={formInput}
+        handleFormTypeChange={handleFormTypeChange}
+        formType={formType}
+        handleSubmit={handleSubmit}
+      />
       {orders.length !== 0 ? (
-        <div className="rounded-xl bg-[#d5fafd] p-2 text-lg underline decoration-2 underline-offset-4 ">
+        <div className="rounded-xl bg-[#fff6f0] p-2 text-lg underline decoration-2 underline-offset-4 ">
           ออเดอร์ของ : {customerName}
         </div>
       ) : null}
