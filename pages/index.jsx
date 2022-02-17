@@ -111,7 +111,7 @@ export default function Home() {
       <div className="flex flex-wrap items-center justify-center  ">
         {orders
           ? orders.map((order, idx) => (
-              <div key={idx}>
+              <div key={`${customerName}${idx}`}>
                 <OrderCard order={order} />
               </div>
             ))
